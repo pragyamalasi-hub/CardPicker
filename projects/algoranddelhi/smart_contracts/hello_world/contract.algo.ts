@@ -1,7 +1,13 @@
-import { Contract } from '@algorandfoundation/algorand-typescript'
+import { Contract, GlobalState } from '@algorandfoundation/algorand-typescript'
 
-export class HelloWorld extends Contract {
-  hello(name: string): string {
-    return `Hello, ${name}`
-  }
+export class Notes extends Contract {
+ todolist = GlobalState<string>({
+    key: "Notelist",
+    initialValue : " "
+ })
+
+ Addtodo(title:string, description:string):string {
+    this.todolist.value = title + "" +  description;
+    return title;
+ }
 }
